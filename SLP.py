@@ -7,8 +7,10 @@ class SLP:
         self.Abias = Abias
         self.bias = 0 if self.Abias else None # else 1 ?
         self.weights = None  
+        self.train_accuracy_history = []
 
     def train(self, X_train, y_train):
+
         number_of_samples, number_of_features = X_train.shape
         self.weights = np.random.uniform(0, 0.5, size=number_of_features) 
         #If number_of_features = 3, then np.random.uniform(0, 0.5, size=3) might generate something like [0.12, 0.34, 0.25]
@@ -27,20 +29,29 @@ class SLP:
                     correct += 1
             
             accuracy = correct / number_of_samples * 100
+            self.train_accuracy_history.append(accuracy)
             # print(f"Epoch {epoch+1}/{self.epochs} - SLP Training Accuracy: {accuracy:.2f}%")
             if epoch % 10 == 0:
+                
                 print(f"Epoch {epoch+1}/{self.epochs}- SLP Training Accuracy: {accuracy:.2f}%")
 
     def test(self, X_test, y_test):
-        number_of_samples = X_test.shape[0]
-        correct = 0
-        confusion_matrix = np.zeros((2, 2)) 
-        for i in range(number_of_samples):
-            Net_input = np.dot(X_test.iloc[i, :], self.weights) + (self.bias if self.Abias else 0)
-            Y_prediction = 1 if Net_input > 0 else -1
-            if Y_prediction == y_test.iloc[i]:
-                correct += 1
+      
+      number_of_samples = X_test.shape[0]
+      correct = 0
+      confusion_matrix = np.zeros((2, 2)) 
+
+      for i in range(number_of_samples):
+
+        Net_input = np.dot(X_test.iloc[i, :], self.weights) + (self.bias if self.Abias else 0)
+        Y_prediction = 1 if Net_input > 0 else -1
         actual_label = y_test.iloc[i]
+
+        # Update accuracy count
+        if Y_prediction == actual_label:
+
+            correct += 1
+
         # Update confusion matrix
         if Y_prediction == 1 and actual_label == 1:
             confusion_matrix[0, 0] += 1  # True Positive (TP)
@@ -51,9 +62,11 @@ class SLP:
         else:
             confusion_matrix[1, 1] += 1  # True Negative (TN)
 
-        print(f"SLP Test Accuracy: {accuracy:.2f}%")
-        accuracy = correct / number_of_samples * 100
-        return confusion_matrix,accuracy
+    # Compute accuracy
+      accuracy = (correct / number_of_samples) * 100
+      print(f"SLP Test Accuracy: {accuracy:.2f}%")
+    
+      return confusion_matrix, accuracy
 
     def predict(self, X):
         X = np.array(X)

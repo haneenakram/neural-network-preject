@@ -6,9 +6,9 @@ import numpy as np
 import random
 from sklearn.model_selection import train_test_split
 
-def load_data():
-  return pd.read_csv("birds.csv")
-
+def load_data(filename):
+  return pd.read_csv(filename)
+print(load_data('birds.csv'))
 def preprocessing(data):
   gender_mappig={'male':0,'female':1}
   data["gender"]=data["gender"].replace(gender_mappig)
@@ -22,6 +22,7 @@ def preprocessing(data):
 
   x=data.drop(columns=['bird category']).values
   y=data['bird category'].values
+  return(data)
 
 def choosing_features(data, feature1 = "gender",feature2 = "beak_length"  ):
   new_df = data[[feature1, feature2]].copy()
@@ -29,6 +30,7 @@ def choosing_features(data, feature1 = "gender",feature2 = "beak_length"  ):
 
   X=new_df.drop(columns='bird category')
   Y=new_df['bird category']
+  return new_df
 
 def filter_classes(data, class_1, class_2):
     """Filters the dataset to include only two selected classes."""
@@ -48,7 +50,7 @@ def filter_classes(data, class_1, class_2):
 
 def train_split(selected_features,filtered_data):
     # Select a balanced subset of 30 samples from each bird category class
-    train_data = filtered_data.groupby('bird category', group_keys=False).apply(lambda x: x.sample(n=30, random_state=42)).reset_index(drop=True)    
+    train_data = filtered_data.groupby('bird category', group_keys=False).apply(lambda x: x.sample(n=30, random_state=42))   
     if 'bird category' not in selected_features:
         selected_features.append('bird category')
     train_data = train_data[selected_features]
@@ -64,7 +66,7 @@ def train_split(selected_features,filtered_data):
 # selected_features = ['gender', 'beak_length'] 
 # X_train,y_train,X_test,y_test=train_split(selected_features,filtered_data) 
 
-def plot_decision_boundary(model, X, y):
+def plot_decision_boundary(model, X, y,feature1,feature2):
     # Extract feature limits
     x_min, x_max = X.iloc[:, 0].min() - 1, X.iloc[:, 0].max() + 1
     y_min, y_max = X.iloc[:, 1].min() - 1, X.iloc[:, 1].max() + 1
