@@ -10,6 +10,7 @@ class Adaline:
     self.bias = 0 if self.Abias else None # else 1 ?
     self.weights = None  
     self.losses = []  #loss after avg
+    self.train_accuracy_history = []
     self.MSE_thres=MSE_thres
 
   def train(self, X_train, y_train):
@@ -41,6 +42,8 @@ class Adaline:
       mean_loss=(losses_epoch)/number_of_samples
       self.losses.append(mean_loss)
       accuracy = correct / number_of_samples * 100
+      self.losses.append(mean_loss)
+      self.train_accuracy_history.append(accuracy)
       # print(f"Epoch {epoch+1}/{self.epochs},  Loss: {mean_loss:.4f} - Training Accuracy: {accuracy:.2f}%")
       if epoch % 10 == 0 or mean_loss <= self.MSE_thres:
         print(f"Epoch {epoch+1}/{self.epochs}, Loss: {mean_loss:.4f} - Adaline Training Accuracy: {accuracy:.2f}%")
@@ -56,10 +59,11 @@ class Adaline:
     for i in range(number_of_samples):
       linear_output = np.dot(X_test.iloc[i, :], self.weights) + (self.bias if self.Abias else 0)
       Y_prediction = 1 if linear_output > 0 else -1
-      if Y_prediction == y_test.iloc[i]:
+      actual_label = y_test.iloc[i]
+      if Y_prediction == actual_label:
         correct += 1
         # Actual label
-        actual_label = y_test.iloc[i]
+        
         # Update confusion matrix
       if Y_prediction == 1 and actual_label == 1:
           confusion_matrix[0, 0] += 1  # True Positive (TP)

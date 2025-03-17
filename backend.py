@@ -91,6 +91,6 @@ def plot_decision_boundary(model, X, y,feature1,feature2):
     # Labels and title
     plt.xlabel(f"{feature1}")
     plt.ylabel(f"{feature2}")
-    plt.title("Adaline Decision Boundary")
+    plt.title(" Decision Boundary")
     plt.legend()
     plt.show()
