@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from backend import load_data, preprocessing, choosing_features, filter_classes, train_split, plot_decision_boundary
+from backend import (load_data, preprocessing, choosing_features, filter_classes, 
+                     train_split, plot_decision_boundary, predict)
 from SLP import SLP  # Import SLP class
 from Adaline import Adaline  # Import Adaline class
 
@@ -88,6 +89,7 @@ def main():
         # Train the model
         model.train(X_train, y_train)
         
+
         # Display final training results
         training_status.success("Training completed!")
         
@@ -136,15 +138,29 @@ def main():
         st.header("Make Prediction")
         pred_cols = st.columns(2)
         with pred_cols[0]:
-            feat1_val = st.number_input(f"{feature1}", value=0.0)
-        with pred_cols[1]:
-            feat2_val = st.number_input(f"{feature2}", value=0.0)
+            if feature1 == 'gender':
+                feat1_val = st.selectbox(f"{feature1} (Select Gender)", ['male', 'female'])
+            else:
+                feat1_val = st.number_input(f"{feature1}", value=0.0)
         
+        with pred_cols[1]:
+            if feature2 == 'gender':
+                feat2_val = st.selectbox(f"{feature2} (Select Gender)", ['male', 'female'])
+            else:
+                feat2_val = st.number_input(f"{feature2}", value=0.0)
+
         if st.button("Predict"):
-            input_array = np.array([feat1_val, feat2_val])
-            prediction = model.predict(input_array)
-            class_name = "Class 1" if prediction == 1 else "Class 2"
-            st.success(f"Predicted Category: {class_name}")
+            # Map gender to numeric values
+            gender_mapping = {'male': 0, 'female': 1}
+            if feature1 == 'gender':
+                feat1_val = gender_mapping[feat1_val]
+            if feature2 == 'gender':
+                feat2_val = gender_mapping[feat2_val]
+
+            input_data = [feat1_val, feat2_val]
+            prediction = predict(model,input_data,feature1,feature2)
+            predicted_class = CLASS_MAPPING.get(prediction, "Unknown")
+            st.success(f"Predicted Category: {predicted_class}")
 
 if __name__ == "__main__":
     main()
