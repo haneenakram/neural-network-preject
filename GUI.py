@@ -35,7 +35,7 @@ def main():
 
     # Model configuration
     st.header("Model Configuration")
-    model_type = st.selectbox("Select Model", ["Single Layer Perceptron (SLP)", "Adaline"])
+    model_type = st.radio("Select Model", ["Single Layer Perceptron (SLP)", "Adaline"])
     
     # Feature selection
     col1, col2 = st.columns(2)
@@ -49,7 +49,7 @@ def main():
     # Store class names for prediction mapping
     class_names = {
         -1: CLASS_MAPPING[class_1],
-        1: CLASS_MAPPING[class_2]
+         1: CLASS_MAPPING[class_2]
     }
 
     # Hyperparameters
@@ -96,7 +96,6 @@ def main():
             'class_names': class_names
         })
 
-    # Always show results if available
     if st.session_state.confusion_matrix is not None:
         st.success("Training completed!")
         st.header("Training Progress")
@@ -123,12 +122,12 @@ def main():
         with cols[1]: st.write("Confusion Matrix:", st.session_state.confusion_matrix)
 
         st.header("Decision Boundary")
-        fig3, ax3 = plt.subplots()
-        plot_decision_boundary(st.session_state.trained_model, 
+        fig3=plot_decision_boundary(st.session_state.trained_model, 
                               st.session_state.X_train, 
                               st.session_state.y_train, 
                               st.session_state.feature1, 
-                              st.session_state.feature2)
+                              st.session_state.feature2,
+                              st.session_state.class_names)
         st.pyplot(fig3)
 
     # Prediction interface
