@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from backend import (load_data, preprocessing, choosing_features, filter_classes, 
-                     train_split, plot_decision_boundary)
+from backend import *
 from SLP import SLP
 from Adaline import Adaline
 from sklearn.preprocessing import StandardScaler
