@@ -17,6 +17,7 @@ def preprocessing(data):
     return data
 
 def choosing_features(data, feature1, feature2):
+
     new_df = data[[feature1, feature2]].copy()
     new_df["bird category"] = data["bird category"]
     return new_df
@@ -76,3 +77,4 @@ def plot_decision_boundary(model, X, y, feature1, feature2,class_names):
     ax.legend()
 
     return fig 
+
