@@ -27,12 +27,12 @@ def standardize_data(data):
 
 def filter_classes(data, class_1, class_2,class_3):
     filtered_data = data[data['bird category'].isin([class_1, class_2,class_3])].reset_index(drop=True)
-    class_mapping = {class_1: -1, class_2: 0, class_3: 1}
+    class_mapping = {class_1: 0, class_2: 1, class_3: 2}
     filtered_data['bird category'] = filtered_data['bird category'].map(class_mapping)
     
     return filtered_data
 
-def train_test_split_data(selected_features, filtered_data):
+def train_test_split_data(filtered_data):
     # X = data.iloc[:, 1:-1]
     # y = data.iloc[:, -1]
     X=filtered_data.drop(columns=['bird category']).values
