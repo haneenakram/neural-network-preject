@@ -120,8 +120,10 @@ with tab1:
                 # Display training log
                 progress_placeholder.text_area("Training Progress", training_log, height=300)
                 
-                # Save model to session state
+                # Save model and data to session state
                 st.session_state['mlp_model'] = mlp
+                st.session_state['X_train'] = X_train
+                st.session_state['y_train'] = y_train
                 st.session_state['X_test'] = X_test
                 st.session_state['y_test'] = y_test
                 
@@ -135,41 +137,92 @@ with tab2:
     st.subheader("Model Performance")
     
     if 'model_trained' in st.session_state and st.session_state['model_trained']:
-        # Get model and test data from session state
+        # Get model and data from session state
         mlp = st.session_state['mlp_model']
+        X_train = st.session_state['X_train']
+        y_train = st.session_state['y_train']
         X_test = st.session_state['X_test']
         y_test = st.session_state['y_test']
         
-        # Make predictions
-        y_pred_probs = mlp.predict(X_test)
-        y_pred = np.argmax(y_pred_probs, axis=1)
+        # Create a two-column layout for training and test performance
+        col1, col2 = st.columns(2)
         
-        # Calculate accuracy
-        accuracy = accuracy_score(y_test, y_pred)
-        st.write(f"**Overall Accuracy:** {accuracy:.4f} ({accuracy*100:.2f}%)")
+        with col1:
+            st.write("### Training Data Performance")
+            
+            # Make predictions on training data
+            y_train_pred_probs = mlp.predict(X_train)
+            y_train_pred = np.argmax(y_train_pred_probs, axis=1)
+            
+            # Calculate training accuracy
+            train_accuracy = accuracy_score(y_train, y_train_pred)
+            st.write(f"**Training Accuracy:** {train_accuracy:.4f} ({train_accuracy*100:.2f}%)")
+            
+            # Display training confusion matrix
+            cm_train = confusion_matrix(y_train, y_train_pred)
+            fig_train_cm, ax_train_cm = plt.subplots(figsize=(4, 3))
+            disp_train = ConfusionMatrixDisplay(confusion_matrix=cm_train)
+            disp_train.plot(cmap=plt.cm.Blues, ax=ax_train_cm)
+            plt.title('Training Confusion Matrix')
+            plt.tight_layout()
+            st.pyplot(fig_train_cm, use_container_width=False)
+            
+            # Display training classification report
+            st.write("#### Classification Report")
+            train_report = classification_report(y_train, y_train_pred, output_dict=True)
+            train_report_df = pd.DataFrame(train_report).transpose()
+            st.table(train_report_df)
+            
+            # Plot training classification report as heatmap
+            fig_train_report, ax_train_report = plt.subplots(figsize=(5, 3))
+            sns.heatmap(train_report_df.iloc[:-1, :3].astype(float), annot=True, fmt=".2f", cmap="Blues", ax=ax_train_report)
+            plt.title('Training Classification Report Visualization')
+            st.pyplot(fig_train_report, use_container_width=False)
         
-        # Display confusion matrix
-        st.write("### Confusion Matrix")
-        cm = confusion_matrix(y_test, y_pred)
-        fig, ax = plt.subplots(figsize=(4, 3))
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-        disp.plot(cmap=plt.cm.Blues, ax=ax)
-        plt.title('Confusion Matrix')
-        plt.tight_layout()
-        # Use the width parameter to control display size
-        st.pyplot(fig, use_container_width=False)
+        with col2:
+            st.write("### Test Data Performance")
+            
+            # Make predictions on test data
+            y_test_pred_probs = mlp.predict(X_test)
+            y_test_pred = np.argmax(y_test_pred_probs, axis=1)
+            
+            # Calculate test accuracy
+            test_accuracy = accuracy_score(y_test, y_test_pred)
+            st.write(f"**Test Accuracy:** {test_accuracy:.4f} ({test_accuracy*100:.2f}%)")
+            
+            # Display test confusion matrix
+            cm_test = confusion_matrix(y_test, y_test_pred)
+            fig_test_cm, ax_test_cm = plt.subplots(figsize=(4, 3))
+            disp_test = ConfusionMatrixDisplay(confusion_matrix=cm_test)
+            disp_test.plot(cmap=plt.cm.Blues, ax=ax_test_cm)
+            plt.title('Test Confusion Matrix')
+            plt.tight_layout()
+            st.pyplot(fig_test_cm, use_container_width=False)
+            
+            # Display test classification report
+            st.write("#### Classification Report")
+            test_report = classification_report(y_test, y_test_pred, output_dict=True)
+            test_report_df = pd.DataFrame(test_report).transpose()
+            st.table(test_report_df)
+            
+            # Plot test classification report as heatmap
+            fig_test_report, ax_test_report = plt.subplots(figsize=(5, 3))
+            sns.heatmap(test_report_df.iloc[:-1, :3].astype(float), annot=True, fmt=".2f", cmap="Blues", ax=ax_test_report)
+            plt.title('Test Classification Report Visualization')
+            st.pyplot(fig_test_report, use_container_width=False)
         
-        # Display classification report
-        st.write("### Classification Report")
-        report = classification_report(y_test, y_pred, output_dict=True)
-        report_df = pd.DataFrame(report).transpose()
-        st.table(report_df)
+        # Compare training vs test performance (bar chart)
+        st.write("### Training vs Test Accuracy Comparison")
+        comparison_df = pd.DataFrame({
+            'Dataset': ['Training', 'Testing'],
+            'Accuracy': [train_accuracy, test_accuracy]
+        })
         
-        # Plot classification report as heatmap
-        fig, ax = plt.subplots(figsize=(5, 3))
-        sns.heatmap(report_df.iloc[:-1, :3].astype(float), annot=True, fmt=".2f", cmap="Blues", ax=ax)
-        plt.title('Classification Report Visualization')
-        st.pyplot(fig, use_container_width=False)
+        fig_comparison, ax_comparison = plt.subplots(figsize=(6, 3))
+        sns.barplot(x='Dataset', y='Accuracy', data=comparison_df, ax=ax_comparison)
+        plt.title('Training vs Test Accuracy')
+        plt.ylim(0, 1)
+        st.pyplot(fig_comparison, use_container_width=False)
         
         # Summary of parameters used
         st.write("### Model Parameters")
