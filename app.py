@@ -151,11 +151,13 @@ with tab2:
         # Display confusion matrix
         st.write("### Confusion Matrix")
         cm = confusion_matrix(y_test, y_pred)
-        fig, ax = plt.subplots(figsize=(8, 6))
+        fig, ax = plt.subplots(figsize=(4, 3))
         disp = ConfusionMatrixDisplay(confusion_matrix=cm)
         disp.plot(cmap=plt.cm.Blues, ax=ax)
         plt.title('Confusion Matrix')
-        st.pyplot(fig)
+        plt.tight_layout()
+        # Use the width parameter to control display size
+        st.pyplot(fig, use_container_width=False)
         
         # Display classification report
         st.write("### Classification Report")
@@ -164,10 +166,10 @@ with tab2:
         st.table(report_df)
         
         # Plot classification report as heatmap
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(5, 3))
         sns.heatmap(report_df.iloc[:-1, :3].astype(float), annot=True, fmt=".2f", cmap="Blues", ax=ax)
         plt.title('Classification Report Visualization')
-        st.pyplot(fig)
+        st.pyplot(fig, use_container_width=False)
         
         # Summary of parameters used
         st.write("### Model Parameters")
@@ -232,11 +234,11 @@ with tab3:
             })
             
             # Plot probability distribution
-            fig, ax = plt.subplots(figsize=(8, 4))
+            fig, ax = plt.subplots(figsize=(4, 2))
             sns.barplot(x='Bird Category', y='Probability', data=probs_df, ax=ax)
             plt.title('Classification Probabilities')
             plt.ylim(0, 1)
-            st.pyplot(fig)
+            st.pyplot(fig,use_container_width=False)
     else:
         st.info("Train the model first to classify samples.")
 
