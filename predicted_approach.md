@@ -1,7 +1,7 @@
 # the Fine-Grained Fruit Quality Assessment project solutions
 ---
 
-## 1. CNN-Based Custom Architecture (Baseline Model)
+## 1. CNN-Based Custom Architecture (Baseline Model) => Menna
 
 **Goal**: Create a simple yet effective CNN from basic layers to classify fruit quality.
 
@@ -21,7 +21,7 @@
 
 ---
 
-## 2. Transfer Learning with Pretrained Weights (Without using keras.applications)
+## 2. Transfer Learning with Pretrained Weights (Without using keras.applications) => Zeina
 
 **Goal**: Use pretrained weights but implement architecture manually to comply with the rule.
 
@@ -40,7 +40,7 @@
 
 ---
 
-## 3. Vision Transformer (ViT or Swin Transformer)
+## 3. Vision Transformer (ViT or Swin Transformer) => Haneen
 
 **Goal**: Use attention-based architecture for fine-grained image classification.
 
@@ -60,7 +60,7 @@
 
 ---
 
-## 4. Handling Class Imbalance (Essential for All Models)
+## 4. Handling Class Imbalance (Essential for All Models) => zeina
 
 Since the dataset is unbalanced, apply at least one of these techniques:
 - Weighted loss (class_weight in Keras, or manual weighting in loss function)
@@ -70,7 +70,7 @@ Since the dataset is unbalanced, apply at least one of these techniques:
 
 ---
 
-## 5. Ensemble Learning (Optional Final Approach)
+## 5. Ensemble Learning (Optional Final Approach) => haneen
 
 **Goal**: Combine the predictions of the three diverse models.
 
@@ -83,7 +83,7 @@ Since the dataset is unbalanced, apply at least one of these techniques:
 
 ---
 
-## Data Preparation Steps (Must Include)
+## Data Preparation Steps (Must Include) => zeina
 -	Resize images consistently (e.g., 224x224)
 -	Normalize images
 -	Label encode the categories
@@ -92,7 +92,7 @@ Since the dataset is unbalanced, apply at least one of these techniques:
 
 ---
 
-## Model Training & Evaluation
+## Model Training & Evaluation => menna
 -	Use EarlyStopping, ModelCheckpoint
 -	Save weights (model.save_weights('model_weights.h5'))
 -	Evaluate on validation set using accuracy, confusion matrix

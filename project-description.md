@@ -56,3 +56,6 @@ You must register and submit your results on Kaggle website.
 [test dataset](https://drive.usercontent.google.com/download?id=1AQbJKptQI2Y1C-xjZRLYQN88R-VtQ79w&export=download&authuser=0)
 
 Note: it is too large dont download it, we will use kaggle
+
+to use data in kaggle, open a new notebook then 
+---
