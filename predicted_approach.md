@@ -94,7 +94,7 @@ Since the dataset is unbalanced, apply at least one of these techniques:
 
 ## Model Training & Evaluation => menna
 -	Use EarlyStopping, ModelCheckpoint
--	Save weights (model.save_weights('model_weights.h5'))
+-	Save weights (model.save_weights('model_weights.keras'))
 -	Evaluate on validation set using accuracy, confusion matrix
 -	Export predictions to CSV for Kaggle
 

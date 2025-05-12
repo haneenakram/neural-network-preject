@@ -57,5 +57,6 @@ You must register and submit your results on Kaggle website.
 
 Note: it is too large dont download it, we will use kaggle
 
-to use data in kaggle, open a new notebook then 
+to use data in kaggle, open a new notebook
+ 
 ---
