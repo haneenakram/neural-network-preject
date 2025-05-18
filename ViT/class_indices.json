@@ -1,9 +1,0 @@
-{
-  "banana_overripe": 0,
-  "banana_ripe": 1,
-  "banana_rotten": 2,
-  "banana_unripe": 3,
-  "tomato_fully_ripened": 4,
-  "tomato_green": 5,
-  "tomato_half_ripened": 6
-}

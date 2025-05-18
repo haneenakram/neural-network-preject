@@ -83,7 +83,7 @@ def main(image_paths, model_path, output_file, class_indices_path):
 if __name__ == "__main__":
     MODEL_PATH = 'best_vit_model.keras'
     OUTPUT_FILE = 'exam_submission.csv'
-    CLASS_INDICES_PATH = 'class_indices.json'
+    CLASS_INDICES_PATH = '../class_indices.json'
    
     import glob
     TEST_DIR = 'testNew'

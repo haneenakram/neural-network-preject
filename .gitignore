@@ -1,1 +1,7 @@
 testNew
+venv/
+__pycache__/
+*.h5
+*.keras
+ ResNet-50/resnet_weights.h5
+CNN + Transformer Hybrid Model/CNN_transformer.weights.h5
