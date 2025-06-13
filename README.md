@@ -172,6 +172,7 @@ fruit-quality-assessment/
 │   ├── fruit_quality_vit_complete.keras
 │   └── vit_weights.h5
 ├── .gitignore
+├── class_indeces.json
 └── README.md
 ```
 
