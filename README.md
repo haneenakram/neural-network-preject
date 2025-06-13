@@ -13,7 +13,7 @@
 
 This repository showcases an advanced deep learning project for **fine-grained fruit quality assessment**, implementing and comparing **6 different neural network architectures** to classify fruits into specific ripeness and quality categories. This project demonstrates mastery of modern deep learning techniques, from CNNs to Vision Transformers.
 
-> **💡 Course Foundation**: This project builds upon fundamental neural network concepts learned through implementing [Perceptron & Adaline algorithms](../../tree/task1-perceptron-adaline) and [Multi-Layer Perceptron with Backpropagation](../../tree/task2-backpropagation-mlp) from scratch.
+> **💡 Course Foundation**: This project builds upon fundamental neural network concepts learned through implementing [Perceptron & Adaline algorithms](../../tree/task1) and [Multi-Layer Perceptron with Backpropagation](../../tree/task2) from scratch.
 
 ## 📋 Project Overview
 
