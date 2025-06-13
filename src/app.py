@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from sklearn.metrics import ConfusionMatrixDisplay
 from MLP import MLP
-from utils import read_file, data_encode, standardize_data, filter_classes, train_test_split_data
+from src.utils import read_file, data_encode, standardize_data, filter_classes, train_test_split_data
 
 # Set page configuration
 st.set_page_config(page_title="MLP Neural Network Classifier", layout="wide")

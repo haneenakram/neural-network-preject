@@ -1,5 +1,5 @@
 import numpy as np
-from utils import sigmoid, sigmoid_derivative, tanh, tanh_derivative
+from src.utils import sigmoid, sigmoid_derivative, tanh, tanh_derivative
 
 class MLP:
     def __init__(self, inputSize=5,hiddenLayers=2, neurons=3,outputSize=3, learning_rate=0.01, epochs=1000, Abias=True, activationFn=None):
