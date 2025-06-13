@@ -195,7 +195,7 @@ fruit-quality-assessment/
 ## 🏆 Competition Results
 
 - **Kaggle Competition**: Fine-Grained Fruit Quality Assessment
-- **Best Submission**: Vision Transformer model with 95.39% validation accuracy
+- **Best Submission**: CoAtNet model with 95.39% validation accuracy
 - **Submission Format**: CSV with ImageID, Class (0-6), and ClassName
 
 ## 📚 References
