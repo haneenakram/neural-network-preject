@@ -2,6 +2,10 @@ testNew
 venv/
 __pycache__/
 *.h5
+**/*.csv
 *.keras
  ResNet-50/resnet_weights.h5
 CNN + Transformer Hybrid Model/CNN_transformer.weights.h5
+tobedeleted
+ViT/venv/
+ViT/__pycache__/
