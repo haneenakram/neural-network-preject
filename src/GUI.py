@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from backend import *
-from SLP import SLP
-from Adaline import Adaline
+from src.SLP import SLP
+from src.Adaline import Adaline
 from sklearn.preprocessing import StandardScaler
 
 CLASS_MAPPING = {0: "A", 1: "B", 2: "C"}

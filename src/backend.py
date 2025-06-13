@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 def load_data(filename):
-    return pd.read_csv(filename)
+    return pd.read_csv(f"../data/{filename}")
 
 def preprocessing(data):
     gender_mapping = {'male': 0, 'female': 1}
