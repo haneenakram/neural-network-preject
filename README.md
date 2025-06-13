@@ -175,42 +175,6 @@ fruit-quality-assessment/
 └── README.md
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-```bash
-pip install tensorflow>=2.8.0
-pip install numpy pandas matplotlib seaborn
-pip install scikit-learn
-pip install opencv-python
-```
-
-### Running the Models
-
-1. **Clone the repository**
-2. **Download the dataset** from Kaggle competition
-3. **Run training notebooks** in the `notebooks/` directory
-4. **Load pre-trained weights** from `weights/` directory for inference
-
-### Inference Example
-
-```python
-from models.vision_transformer import create_vit_model
-import tensorflow as tf
-
-# Load model
-model = create_vit_model()
-model.load_weights('weights/best_vit_model.h5')
-
-# Predict on new image
-prediction = model.predict(preprocessed_image)
-class_names = ['banana_overripe', 'banana_ripe', 'banana_rotten',
-               'banana_unripe', 'tomato_fully_ripened', 'tomato_green',
-               'tomato_half_ripened']
-predicted_class = class_names[np.argmax(prediction)]
-```
-
 ## 🔍 Key Insights
 
 ### What Worked Best
@@ -245,4 +209,4 @@ This project is part of an academic assignment for deep learning course. All rig
 
 ---
 
-_Project completed as part of Deep Learning course - Spring 2025_
+_Project completed as part of Neural Network course - Spring 2025_
