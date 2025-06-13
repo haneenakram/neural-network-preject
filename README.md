@@ -155,8 +155,8 @@ This project represents the culmination of a comprehensive neural networks cours
 ```
 
 ### 🔗 Related Course Work
-- **[Task 1: Perceptron & Adaline](../../tree/task1-perceptron-adaline)** - Foundation algorithms
-- **[Task 2: Backpropagation MLP](../../tree/task2-backpropagation-mlp)** - Core deep learning concepts
+- **[Task 1: Perceptron & Adaline](../../tree/task1)** - Foundation algorithms
+- **[Task 2: Backpropagation MLP](../../tree/task2)** - Core deep learning concepts
 
 ## 🎯 Key Learning Outcomes
 
