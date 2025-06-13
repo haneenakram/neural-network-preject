@@ -100,7 +100,7 @@ Task1-Perceptron-Adaline/
 pip install numpy
 pip install matplotlib
 pip install pandas
-pip install tkinter  # Usually comes with Python
+pip install streamlit 
 ```
 
 ### Running the Application
@@ -108,7 +108,7 @@ pip install tkinter  # Usually comes with Python
 2. Navigate to the project directory
 3. Run the main GUI application:
 ```bash
-python src/gui.py
+python src/GUI.py
 ```
 
 ### Usage Steps
