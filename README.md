@@ -108,7 +108,7 @@ pip install streamlit
 2. Navigate to the project directory
 3. Run the main GUI application:
 ```bash
-python src/GUI.py
+streamlit run src/GUI.py
 ```
 
 ### Usage Steps
